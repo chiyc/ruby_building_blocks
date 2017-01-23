@@ -20,14 +20,14 @@ class Tree
     end
 
     until current_node == nil
-      if key < current_node.value
+      if (key <=> current_node.value) < 0
         if current_node.left == nil
           current_node.left = Node.new(key, current_node)
           return nil
         else
           current_node = current_node.left
         end
-      elsif key > current_node.value
+      elsif (key <=> current_node.value) > 0
         if current_node.right == nil
           current_node.right = Node.new(key, current_node)
           return nil
