@@ -20,8 +20,26 @@ class Game
       puts
     end
   end
-
   def start
+    puts
+    puts  "Would you like to play as the: "
+    puts "1. Code Breaker"
+    puts "2. Code Setter"
+    puts
+    input = 0
+    until input == 2 || input == 1
+      print "Please enter the corresponding number response (1, 2): "
+      input = gets.chomp.to_i
+    end
+    if input == 1
+      puts
+      start_breaking
+    elsif input == 2
+      puts
+      puts "Game mode not implemented."
+    end
+  end
+  def start_breaking
     @code = @colors.sample(4)
     p @code
     puts "Secret code initialized."
