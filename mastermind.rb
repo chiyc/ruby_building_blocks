@@ -6,7 +6,7 @@ class Game
     @turn = 0
     @game_state = 0
   end
-  def display_state # 23 char
+  def display_state
     puts
     puts "          Decoding Board     Clue"
     puts "         -----------------------"
@@ -24,7 +24,7 @@ class Game
     puts
     puts  "Would you like to play as the: "
     puts "1. Code Breaker"
-    puts "2. Code Setter"
+    puts "2. Code Maker"
     puts
     input = 0
     until input == 2 || input == 1
@@ -36,9 +36,59 @@ class Game
       start_breaking
     elsif input == 2
       puts
-      puts "Game mode not implemented."
+      start_making
     end
   end
+  def start_making
+    set_code
+    puts
+    puts "Thanks! Your opponent will now start guessing."
+    puts
+    puts
+    puts "          Decoding Board     Clue"
+    puts "         -----------------------"
+    i = 0
+    until @game_state != 0
+      sleep(0.75)
+      cpu_guess
+      validate(@guess[-1])
+      if i < 9
+        print " "
+      end
+      print "Guess #{i+1}:  " + @guess[i][0].to_s + "   " + @guess[i][1].to_s + "   " + @guess[i][2].to_s + "   " + @guess[i][3].to_s + "   :  "
+      puts "#{@clue[i][0]}#{@clue[i][1]}"
+      puts "                              #{@clue[i][2]}#{@clue[i][3]}"
+      puts
+      check_game
+      i += 1
+    end
+    if @game_state == 1
+      puts "Your code was broken! Nice try!"
+    elsif @game_state == 2
+      puts "You win! You stumped the code breaker!"
+    end
+  end
+
+  def cpu_guess
+    @guess.push(@colors.sample(4))
+  end
+
+  def set_code
+    @code = []
+    until @code.length == 4
+      valid_input = false
+      print "Please enter the code color to set in slot #{@code.length + 1}: "
+      until valid_input == true
+        input = gets.chomp.upcase.to_sym
+        valid_input = check(input)
+        if valid_input == false
+          print "Please enter a valid input for slot #{@code.length + 1}: "
+        end
+      end
+      @code.push(input)
+    end
+  end
+
   def start_breaking
     @code = @colors.sample(4)
     p @code
@@ -84,7 +134,6 @@ class Game
     end
     @guess.push(guess)
     validate(guess)
-    # next need to validate guesses and output display with updated display and decoding clue
   end
 
   def validate(guess)
