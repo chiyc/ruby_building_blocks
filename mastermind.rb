@@ -40,6 +40,7 @@ class Game
     end
   end
   def start_making
+    show_legend
     set_code
     puts
     puts "Thanks! Your opponent will now start guessing."
@@ -90,6 +91,7 @@ class Game
   end
 
   def start_breaking
+    show_legend
     @code = @colors.sample(4)
     p @code
     puts "Secret code initialized."
@@ -166,6 +168,22 @@ class Game
     else
       return false
     end
+  end
+
+  def show_legend
+    puts
+    puts "This version of mastermind allows 6 colors as shown by the below legend."
+    puts "Color inputs must be entered using the initial of the color."
+    puts
+    puts "R = Red        G = Green       B = Blue"
+    puts "Y = Yellow     O = Orange      P = Purple"
+    puts
+    puts "For the code clues, please refer to the symbols below. "
+    puts
+    puts "o   Correct color in the correct position"
+    puts "x   Correct color in the wrong position"
+    puts "-   Neither correct color nor position"
+    puts
   end
 end
 
