@@ -168,7 +168,7 @@ module Enumerable
 end
 
 # testing inspired by ruby-doc.rg/core-2.4.0/Enumerable.html
-
+=begin
 sample_array = [1, 2, 3, 4, 5]
 [1, 2, 3, 4, 5].each { |x| puts x }
 [1, 2, 3, 4, 5].my_each { |x| puts x }
@@ -211,3 +211,4 @@ myproc = Proc.new do |x|
   x*x
 end
 puts ary.my_map(myproc) { |x| x + x }
+=end
