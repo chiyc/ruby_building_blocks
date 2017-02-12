@@ -1,4 +1,4 @@
-require_relative "../caesar_cipher.rb"
+require "caesar_cipher.rb"
 
 describe "the cipher function" do
   it "encodes 'To be or not to be' rot 1" do

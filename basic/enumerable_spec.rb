@@ -1,4 +1,4 @@
-require_relative "../enumerable.rb"
+require "enumerable.rb"
 
 describe Enumerable do
   let(:ary) { [1, 2, 3, 4, 5] }
