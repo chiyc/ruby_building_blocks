@@ -1,6 +1,6 @@
 class Board
   if __FILE__ != $0
-    attr_reader :board, :display, :player, :game_state
+    attr_accessor :board, :display, :player, :game_state
   end
   def initialize
     @board = Array.new(9,0)
