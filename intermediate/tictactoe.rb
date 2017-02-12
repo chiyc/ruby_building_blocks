@@ -1,4 +1,7 @@
 class Board
+  if __FILE__ != $0
+    attr_reader :board, :display, :player, :game_state
+  end
   def initialize
     @board = Array.new(9,0)
     @display = (0..8).to_a
@@ -115,5 +118,7 @@ class Board
   end
 end
 
-board = Board.new
-board.start
+if __FILE__ == $0
+  board = Board.new
+  board.start
+end
