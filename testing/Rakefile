@@ -2,6 +2,10 @@ require 'rspec/core/rake_task'
 
 task :default => :spec
 
+task :play do
+  ruby "lib/connect_four.rb"
+end
+
 RSpec::Core::RakeTask.new do |task|
 
   task.rspec_opts = ['-f documentation']
