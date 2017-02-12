@@ -35,7 +35,7 @@ class Board
 
   def play_move(player, move)
     if confirm(move)
-      @board[move] = player
+      @board[move.to_i] = player
       @player = 3 - player
       return true
     end
@@ -43,6 +43,11 @@ class Board
   end
 
   def confirm(move)
+    if move.ord >= 48 && move.ord <= 56
+      move = move.to_i
+    else
+      return false
+    end 
     if move >= 0 && move <= 8 && @board[move] == 0
       return true
     else
@@ -66,10 +71,10 @@ class Board
     played = false
     until played == true
       print "Enter the location you would like to play for player #{player}: "
-      move = gets.chomp.to_i
-      played = play_move(player, move)
+      move = gets.chomp
+      played = play_move(@player, move)
       if played == false
-        puts "Location not allowed"
+        puts "Location not valid"
       end
     end
   end
