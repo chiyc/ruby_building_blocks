@@ -1,6 +1,6 @@
 require 'connect_four.rb'
 
-describe "connect four game" do
+describe "connect four" do
   let(:game) { ConnectFour.new}
   
   describe "#initialize" do
@@ -15,16 +15,17 @@ describe "connect four game" do
 
   describe "#check(move)" do
     it "forbids invalid column move input" do
-      expect(game.check("sd")).to be false
-      expect(game.check("-1")).to be false
-      expect(game.check("7")).to be false
-      expect(game.check("7")).to be false
-      expect(game.check("")).to be false
-      expect(game.check("132")).to be false
+      expect(game.board.check("sd")).to be false
+      expect(game.board.check("-1")).to be false
+      expect(game.board.check("7")).to be false
+      expect(game.board.check("7")).to be false
+      expect(game.board.check("")).to be false
+      expect(game.board.check("132")).to be false
     end
     it "forbids move in full column" do
       game.board.board[2].each_with_index { |x, i| game.board.board[2][i] = 1 }
-      expect(game.check('2')).to be false
+      expect(game.board.check('2')).to be false
+      expect(game.play('2')).to be false
     end
   end
   
@@ -42,16 +43,17 @@ describe "connect four game" do
     end
 
     it "changes current player to next player" do
-      game.play('4')
+      expect(game.play('4')).to be true
       expect(game.current_player).to eq(2)
-      game.play('1')
+      expect(game.play('1')).to be true
       expect(game.current_player).to eq(1)
     end
 
     it "correctly drops next piece on top of first piece" do
-      game.play('3')
-      game.play('2')
+      expect(game.play('3')).to be true
+      expect(game.play('3')).to be true
       expect(game.board.board[3][1]).to eq(2)
     end
+
   end
 end
