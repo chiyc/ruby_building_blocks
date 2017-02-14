@@ -14,9 +14,9 @@ class ConnectFour
   def play(move)
     if @board.check(move)
       move = move.to_i
-      @board.play(@current_player, move)
+      row = @board.play(@current_player, move)
       @current_player = 3 - @current_player
-      return true
+      return row
     else
       return false
     end
@@ -26,8 +26,9 @@ class ConnectFour
     until @game_state != 0
       display(board)
       puts
-      until play(prompt_turn(@current_player)); end
+      until r = play(prompt_turn(@current_player)); end
       puts
+
       
     end
   end

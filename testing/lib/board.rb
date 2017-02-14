@@ -11,7 +11,7 @@ class Board
     end
     if move.ord < 48 || move.ord > 54 # ascii codes for '0' and '6'
       return false
-    elsif is_full?(move.to_i)
+    elsif col_full?(move.to_i)
       return false
     end
     return true
@@ -20,9 +20,10 @@ class Board
   def play(key, col)
     row = @board[col].find_index(0)
     @board[col][row] = key
+    return row
   end
 
-  def is_full?(col)
+  def col_full?(col)
     @board[col].all? { |piece| piece != 0 }
   end
 
@@ -37,10 +38,6 @@ class Board
     return 0
   end
 
-  def connect_rows?
-
-  end
-
   def connect_col?(col)
     if @board[col].join.include?("1111")
       return 1
@@ -50,7 +47,4 @@ class Board
     return 0
   end
 
-  def connect_cols?
-
-  end
 end
