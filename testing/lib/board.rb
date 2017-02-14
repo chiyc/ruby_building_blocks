@@ -26,4 +26,31 @@ class Board
     @board[col].all? { |piece| piece != 0 }
   end
 
+  def connect_row?(row)
+    row_string = ""
+    @board.each { |col| row_string += col[row].to_s }
+    if row_string.include?("1111")
+      return 1
+    elsif row_string.include?("2222")
+      return 2
+    end
+    return 0
+  end
+
+  def connect_rows?
+
+  end
+
+  def connect_col?(col)
+    if @board[col].join.include?("1111")
+      return 1
+    elsif @board[col].join.include?("2222")
+      return 2
+    end
+    return 0
+  end
+
+  def connect_cols?
+
+  end
 end

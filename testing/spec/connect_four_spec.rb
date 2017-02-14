@@ -54,6 +54,27 @@ describe "connect four" do
       expect(game.play('3')).to be true
       expect(game.board.board[3][1]).to eq(2)
     end
+  end
 
+  describe "Board class" do
+    it "finds connect 4 in row" do
+      game.board.board.each_with_index { |x, i| game.board.board[i][0] = 1 }
+      game.board.board[0][0] = 2
+      game.board.board[1][0] = 2
+      game.board.board[2][0] = 2
+      expect(game.board.connect_row?(0)).to eq(1)
+    end
+
+    it "finds connect 4 in column" do
+      game.play('3')
+      game.play('4')
+      game.play('3')
+      game.play('4')
+      game.play('3')
+      game.play('4')
+      game.play('3')
+      expect(game.board.connect_col?(3)).to eq(1)
+      expect(game.board.connect_col?(4)).to eq(0)
+    end
   end
 end

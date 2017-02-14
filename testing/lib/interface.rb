@@ -24,9 +24,11 @@ module Interface
   end
 
   def prompt_turn(player)
-    print "Player #{player}, please select your move: "
+    print "Player #{player}, please select a valid move: "
     return gets.chomp
   end
+
+
 end
 
 if __FILE__ == $0

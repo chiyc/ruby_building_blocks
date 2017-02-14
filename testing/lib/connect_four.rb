@@ -1,5 +1,5 @@
-require "board.rb"
-require "interface.rb"
+require_relative "board.rb"
+require_relative "interface.rb"
 
 class ConnectFour
   include Interface
@@ -8,6 +8,7 @@ class ConnectFour
   def initialize
     @board = Board.new
     @current_player = 1
+    @game_state = 0
   end
 
   def play(move)
@@ -20,4 +21,19 @@ class ConnectFour
       return false
     end
   end
+
+  def start
+    until @game_state != 0
+      display(board)
+      puts
+      until play(prompt_turn(@current_player)); end
+      puts
+      
+    end
+  end
+end
+
+if __FILE__ == $0
+  game = ConnectFour.new
+  game.start
 end
