@@ -61,6 +61,16 @@ describe "connect four" do
       expect(game.play('3')).to eq(1)
       expect(game.board.board[3][1]).to eq(2)
     end
+
+    it "counts number of moves played" do
+      expect(game.play('4')).to eq(0)
+      expect(game.turns).to eq(1)
+      expect(game.play('1')).to eq(0)
+      expect(game.turns).to eq(2)
+      expect(game.play('3')).to eq(0)
+      expect(game.play('3')).to eq(1)
+      expect(game.turns).to eq(4)
+    end
   end
 
   describe "Board class" do
@@ -82,6 +92,38 @@ describe "connect four" do
       game.play('3')
       expect(game.board.connect_col?(3)).to eq(1)
       expect(game.board.connect_col?(4)).to eq(0)
+    end
+
+    describe "diagonal search sub functions" do
+      it "finds diagonal in forward slant" do
+        game.board.board[0][0] = 1
+        game.board.board[1][1] = 1
+        game.board.board[2][2] = 1
+        game.board.board[3][3] = 1
+        expect(game.board.connect_diag_f?(3,3)).to eq(1)
+      end
+      it "finds diagonal in backward slant" do
+        game.board.board[3][5] = 2
+        game.board.board[4][4] = 2
+        game.board.board[5][3] = 2
+        game.board.board[6][2] = 2
+        expect(game.board.connect_diag_b?(4,4)).to eq(2)
+      end
+    end
+
+    it "finds diagonal in forward slant" do
+      game.board.board[0][0] = 1
+      game.board.board[1][1] = 1
+      game.board.board[2][2] = 1
+      game.board.board[3][3] = 1
+      expect(game.board.connect_diag?(3,3)).to eq(1)
+    end
+    it "finds diagonal in backward slant" do
+      game.board.board[3][5] = 2
+      game.board.board[4][4] = 2
+      game.board.board[5][3] = 2
+      game.board.board[6][2] = 2
+      expect(game.board.connect_diag?(4,4)).to eq(2)
     end
   end
 end
